@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 503f82dfb7ad3da4d98bd8384099fa8c, type: 3}
+  m_Name: Robber
+  m_EditorClassIdentifier: 
+  Name: Robber
+  OffensiveValue: 5
+  DefensiveValue: 2
+  HealingValue: 0
+  LifeValue: 8
+  graphic: {fileID: 21300000, guid: 5bad824c3b1885741ae4bdcf7cfc2b95, type: 3}
+  loot: {fileID: 11400000, guid: cb48535c81c5d9d45b8673f6b4bc02d6, type: 2}

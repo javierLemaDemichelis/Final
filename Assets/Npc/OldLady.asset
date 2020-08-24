@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 503f82dfb7ad3da4d98bd8384099fa8c, type: 3}
+  m_Name: OldLady
+  m_EditorClassIdentifier: 
+  Name: OldLady
+  OffensiveValue: 2
+  DefensiveValue: 0
+  HealingValue: 5
+  LifeValue: 5
+  graphic: {fileID: 21300000, guid: c6affc361d20539488bb91c6b10c2f37, type: 3}
