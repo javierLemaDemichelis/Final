@@ -61,7 +61,7 @@ public class Pointer : MonoBehaviour
                 //Drag();
                 break;
             case Enumerations.GameState.Action:
-                sensor.GetComponent<Sensor>().SetInteractuable(Enumerations.Interactuable.Npc);
+                //sensor.GetComponent<Sensor>().SetInteractuable(Enumerations.Interactuable.Npc);
                 //Action();
                 break;
             case Enumerations.GameState.Loot:

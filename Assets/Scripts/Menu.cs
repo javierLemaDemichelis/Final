@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Serialization;
 
 public class Menu : MonoBehaviour
 {
     [SerializeField]
     GameObject transitionManager;
-
+    [SerializeField]
+    bool startWithFadeIn = true;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -19,8 +20,11 @@ public class Menu : MonoBehaviour
         
         if (transitionManager != null)
         {
+            if (startWithFadeIn) 
+            {
+                transitionManager.GetComponent<TransitionManager>().StartFadeIn();
+            }
             
-            transitionManager.GetComponent<TransitionManager>().StartFadeIn();
             
         }
         else

@@ -34,7 +34,7 @@ public class GroupManager : MonoBehaviour
     public void CreateGroup(Dictionary<int,NpcInfo> npcGroupInfo) 
     {
         this.itsPlayerGroup = true;
-        this.transform.tag = "HeroGroup";
+        //this.transform.tag = "HeroGroup";
         GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
         for (int i = 0; i < 3; i++) 
         {

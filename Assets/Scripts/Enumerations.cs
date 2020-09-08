@@ -20,8 +20,9 @@ public class Enumerations
     {
         Card,/* Hero,*/ Npc
     }
-    public enum EnemyType 
+    public enum OptionType 
     {
-        None,Robber
+        Gold,AttackPoint,DefensePoint,HealthPoints,Npc,Attack,Flee,Loot,Ignore
     }
+
 }

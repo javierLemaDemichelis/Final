@@ -77,6 +77,7 @@ public class TransitionManager : MonoBehaviour
     }
     public void StartFadeOut() 
     {
+        
         fadeOutInit = true;
         GameObject animatedTransition = GameObject.FindGameObjectWithTag("AnimatedTransition");
         if (animatedTransition != null) 

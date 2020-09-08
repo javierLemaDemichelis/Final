@@ -13,6 +13,7 @@ public class DeckInformation : MonoBehaviour
     [SerializeField]
     List<CardStock> cards = new List<CardStock>();
     Dictionary<int, NpcInfo> npcInParty=new Dictionary<int, NpcInfo>();
+    private int gold = 500;
     bool initCardOpen = false;
     bool initHeroOpen = false;
 
@@ -91,5 +92,17 @@ public class DeckInformation : MonoBehaviour
     public List<CardStock> GetCardInStock() 
     {
         return this.cards;
+    }
+    public void AddGold(int goldToAdd)
+    {
+        this.gold += goldToAdd;
+    }
+    public void RemoveGold(int goldToAdd)
+    {
+        this.gold -= goldToAdd;
+    }
+    public int GetGold() 
+    {
+        return gold;
     }
 }

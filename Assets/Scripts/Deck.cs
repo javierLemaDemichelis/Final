@@ -149,4 +149,13 @@ public class Deck : MonoBehaviour
         countedCards = cardsSorted.Count + cardsInHand;
         return countedCards;
     }
+    public void SetActiveDeck(bool state) 
+    {
+        this.gameObject.SetActive(state);
+    }
+    public bool GetActiveDeck() 
+    {
+        return this.gameObject.activeSelf;
+    }
+    
 }

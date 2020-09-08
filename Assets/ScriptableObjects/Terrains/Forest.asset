@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1513617eb0728e24fab6c3ff7ff9163a, type: 3}
+  m_Name: Forest
+  m_EditorClassIdentifier: 
+  adventureEventForTerrain:
+  - {fileID: 11400000, guid: 56bcfa1e07c2e4f4ea4d0a0daf7d6c9e, type: 2}
+  - {fileID: 11400000, guid: c7c1703da37d55b49b223fbdc1b38a74, type: 2}
+  - {fileID: 11400000, guid: 6bb0a4703a486584c9f5e3375f277e88, type: 2}
+  - {fileID: 11400000, guid: 5b31de97642b30a46b47b0d048d8a1e2, type: 2}
+  - {fileID: 11400000, guid: abbe27e0d63fa02408739da91099d862, type: 2}
+  minLim: 3
+  maxLim: 8
+  backgroundScene: {fileID: 6654844521902616201, guid: 4a93bb475ccf3934bb5e464531cb0b55,
+    type: 3}

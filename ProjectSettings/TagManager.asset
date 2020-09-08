@@ -16,6 +16,7 @@ TagManager:
   - Npc
   - GameContainer
   - HeroGroup
+  - EndTurnButton
   layers:
   - Default
   - TransparentFX

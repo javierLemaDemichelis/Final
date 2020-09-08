@@ -9,4 +9,9 @@ public class AdventureEvents : ScriptableObject
     public NpcInfo npc1;
     public NpcInfo npc2;
     public NpcInfo npc3;
+
+    public string eventText0 = "";
+    public OptionForEvent[] options;
+
+
 }
