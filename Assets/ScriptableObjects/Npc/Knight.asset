@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Knight
   m_EditorClassIdentifier: 
   Name: Lancelot
-  Type: Knight
   OffensiveValue: 5
   DefensiveValue: 2
   HealingValue: 0
   LifeValue: 10
   graphic: {fileID: 21300000, guid: de3bb3a30e1cf9b4990c818e1087fc03, type: 3}
+  loot: {fileID: 0}
+  inanimateObject: 0
+  itsLooteable: 1

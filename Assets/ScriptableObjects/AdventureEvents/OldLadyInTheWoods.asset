@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab840660c6b03140b6a442ffea66469, type: 3}
   m_Name: OldLadyInTheWoods
   m_EditorClassIdentifier: 
-  background: {fileID: 21300000, guid: 7ff99e4d15e3a0d4cb311a3158713c6a, type: 3}
+  background: {fileID: 6654844521902616201, guid: 4a93bb475ccf3934bb5e464531cb0b55,
+    type: 3}
   npc1: {fileID: 0}
   npc2: {fileID: 11400000, guid: 9c07fc94e43dad949aa2d21c0ac185a3, type: 2}
   npc3: {fileID: 0}

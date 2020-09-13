@@ -34,13 +34,16 @@ public class EventChat : MonoBehaviour
             CreateOption(adventureEventToInitialize.options[i],new Vector3(lastPositionX,positionInY,0));
             lastPositionX += separation;
         }
-        
-        //acomodo las posiciones de las opciones
-        float distance = lastPositionX/adventureEventToInitialize.options.Length;
-        for (int i = 0; i < listOfOptions.Count ; i++) 
+        if (adventureEventToInitialize.options.Length > 1) 
         {
-            listOfOptions[i].transform.localPosition = listOfOptions[i].transform.localPosition - new Vector3(distance,0,0);
+            //acomodo las posiciones de las opciones
+            float distance = lastPositionX / adventureEventToInitialize.options.Length;
+            for (int i = 0; i < listOfOptions.Count; i++)
+            {
+                listOfOptions[i].transform.localPosition = listOfOptions[i].transform.localPosition - new Vector3(distance, 0, 0);
+            }
         }
+        
 
     }
     private void CreateOption(OptionForEvent optionForEvent,Vector3 position) 

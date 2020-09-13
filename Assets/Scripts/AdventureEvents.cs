@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class AdventureEvents : ScriptableObject
 {
-    public Sprite background=null;
+    public GameObject background=null;
     public NpcInfo npc1;
     public NpcInfo npc2;
     public NpcInfo npc3;

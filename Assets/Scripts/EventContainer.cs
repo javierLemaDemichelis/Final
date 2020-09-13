@@ -5,25 +5,18 @@ using UnityEngine;
 
 public class EventContainer : MonoBehaviour
 {
-    [SerializeField] GameObject backgroundOfEvent;
-    [SerializeField] List<AdventureEvents> adventureEvents;
+    //[SerializeField] List<AdventureEvents> adventureEvents;
     [SerializeField] Transform spawnPoint;
     [SerializeField] GameObject groupContainerPrefab;
     [SerializeField] AdventureEvents adventureEvent;
-    [SerializeField] GameObject enemyGroup;
+    [SerializeField] GameObject eventGroup;
     [SerializeField] bool startEvent = false;
     [SerializeField] GameObject eventChat;
+    [SerializeField] GameObject backGroundPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        if (startEvent)
-        {
-            CreateStartEvent();
-        }
-        else 
-        {
-            CreateRandomEvent();
-        }
+        
         
     }
 
@@ -32,10 +25,21 @@ public class EventContainer : MonoBehaviour
     {
         
     }
-
+    public void InstantiateEvent(AdventureEvents _adventureEvent) 
+    {
+        adventureEvent = _adventureEvent;
+        backGroundPrefab= adventureEvent.background;
+        Instantiate(backGroundPrefab, this.transform);
+        eventGroup = Instantiate(groupContainerPrefab, this.transform);
+        eventGroup.transform.position = spawnPoint.position;
+        eventGroup.GetComponent<GroupManager>().CreateEnemyGroup(adventureEvent);
+        eventChat.GetComponent<EventChat>().InitializeEventInfo(adventureEvent, this.GetComponent<EventContainer>());
+        StartCoroutine("ShowTextOptions",3);
+    }
+    /*
     public void CreateRandomEvent() 
     {
-        adventureEvent = adventureEvents[Random.Range(1,adventureEvents.Count)];
+        //adventureEvent = adventureEvents[Random.Range(1,adventureEvents.Count)];
         backgroundOfEvent.GetComponent<SpriteRenderer>().sprite = adventureEvent.background;
         enemyGroup = Instantiate(groupContainerPrefab,this.transform);
         enemyGroup.transform.position = spawnPoint.position;
@@ -44,14 +48,14 @@ public class EventContainer : MonoBehaviour
     }
     public void CreateStartEvent()
     {
-        adventureEvent = adventureEvents[0];
+        //adventureEvent = adventureEvents[0];
         backgroundOfEvent.GetComponent<SpriteRenderer>().sprite = adventureEvent.background;
         enemyGroup = Instantiate(groupContainerPrefab, this.transform);
         enemyGroup.transform.position = spawnPoint.position;
         enemyGroup.GetComponent<GroupManager>().CreateEnemyGroup(adventureEvent);
         GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
         gameManager.GetComponent<GameManagerController>().SetCurrentEvent(this.gameObject);
-    }
+    }*/
     IEnumerator SelfDestruct(float time) 
     {
         yield return new WaitForSeconds(time);
@@ -133,10 +137,16 @@ public class EventContainer : MonoBehaviour
             case Enumerations.OptionType.Flee:
                 gameManager.GetComponent<GameManagerController>().StartCoroutine("FleeOption", 2);
                 break;
+            case Enumerations.OptionType.Start:
+                gameManager.GetComponent<GameManagerController>().StartCoroutine("StartOption", 1);
+                break;
         }
         eventChat.SetActive(false);
 
 
     }
-
+    public GameObject GetGroupFromEvent() 
+    {
+        return eventGroup;
+    }
 }

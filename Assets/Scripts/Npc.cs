@@ -13,6 +13,7 @@ public class Npc : MonoBehaviour
     GameObject outline = null;
     [SerializeField]
     GameObject spawnPoint = null;
+    [SerializeField] GameObject npcUI;
     [SerializeField]
     GameObject explotionEffect;
     bool outlineShowed = false;
@@ -23,8 +24,11 @@ public class Npc : MonoBehaviour
     int attack = 0;
     int defence = 0;
     int heal = 0;
+    bool itsInanimateObject=false;
+    bool itsLooteable=false;
     [SerializeField]
     bool itsPlayerGroup = false;
+    LootInfo loot;
     void Start()
     {
         //SetNpcInfo(npcInfo);
@@ -51,7 +55,11 @@ public class Npc : MonoBehaviour
         attack = npcInfo.OffensiveValue;
         defence = npcInfo.DefensiveValue;
         heal = npcInfo.HealingValue;
-
+        npcUI.GetComponent<NpcUI>().SetHealth(_npcInfo.LifeValue, life);
+        npcUI.GetComponent<NpcUI>().SetActionSpended(actionExpended);
+        itsLooteable = _npcInfo.itsLooteable;
+        itsInanimateObject = _npcInfo.inanimateObject;
+        loot = _npcInfo.loot;
     }
     public NpcInfo GetNpcInfo()
     {
@@ -100,6 +108,7 @@ public class Npc : MonoBehaviour
             characterAlive = false;
             this.graphic.SetActive(false);
         }
+        npcUI.GetComponent<NpcUI>().UpdateHealth(life);
     }
     public void RecieveAttack() 
     {
@@ -108,7 +117,11 @@ public class Npc : MonoBehaviour
     public void SetAttackValue(int value) { this.attack = value; }
     public void SetDefenseValue(int value) { this.defence = value; }
     public void SetHealValue(int value) { this.heal = value; }
-    public void SetActionExpended(bool value) { this.actionExpended = value; }
+    public void SetActionExpended(bool value) 
+    { 
+        this.actionExpended = value;
+        npcUI.GetComponent<NpcUI>().SetActionSpended(value);
+    }
     public int GetLifeValue() { return this.life; }
     public int GetAttackValue() { return this.attack; }
     public int GetDefenseValue() { return this.defence; }
@@ -123,5 +136,17 @@ public class Npc : MonoBehaviour
     public bool GetItsPlayerGroup()
     {
         return itsPlayerGroup;
+    }
+    public bool GetItsLooteable() 
+    {
+        return itsLooteable;
+    }
+    public bool GetItsInanimateObject()
+    {
+        return itsInanimateObject;
+    }
+    public LootInfo GetLoot() 
+    {
+        return loot;
     }
 }

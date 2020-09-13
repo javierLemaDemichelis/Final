@@ -13,4 +13,6 @@ public class NpcInfo : ScriptableObject
     public int LifeValue;
     public Sprite graphic;
     public LootInfo loot;
+    public bool inanimateObject = false;
+    public bool itsLooteable=true;
 }

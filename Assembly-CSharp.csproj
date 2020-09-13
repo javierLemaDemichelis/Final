@@ -95,12 +95,15 @@
     <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\Npc.cs" />
     <Compile Include="Assets\Scripts\NpcInfo.cs" />
+    <Compile Include="Assets\Scripts\NpcUI.cs" />
     <Compile Include="Assets\Scripts\OptionForEvent.cs" />
     <Compile Include="Assets\Scripts\Pointer.cs" />
     <Compile Include="Assets\Scripts\PredefinedTimeline.cs" />
+    <Compile Include="Assets\Scripts\Quest.cs" />
     <Compile Include="Assets\Scripts\Sensor.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\StoreInformation.cs" />
+    <Compile Include="Assets\Scripts\TerrainClass.cs" />
     <Compile Include="Assets\Scripts\TerrainEvents.cs" />
     <Compile Include="Assets\Scripts\TimelineClass.cs" />
     <Compile Include="Assets\Scripts\TransitionManager.cs" />

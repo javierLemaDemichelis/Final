@@ -63,7 +63,7 @@ public class Deck : MonoBehaviour
             }
             Debug.Log("cards quantity:" + cardsQuantity);
             int randomStock = 0;
-            
+            //mezcla las cartas
             while (cardsSorted.Count<cardsQuantity) 
             {
                 randomStock = Random.Range(0, cards.Count);
@@ -130,6 +130,13 @@ public class Deck : MonoBehaviour
         countOfCards.text = cardsSorted.Count.ToString();
         return cardInfoToReturn;
     }
+    public void PutCardInDeck(CardInfo _card)
+    {
+       
+        cardsSorted.Add(_card);
+        countOfCards.text = cardsSorted.Count.ToString();
+        
+    }
     public int CountCards()
     {
         int countedCards = 0;
@@ -157,5 +164,8 @@ public class Deck : MonoBehaviour
     {
         return this.gameObject.activeSelf;
     }
+    public void AddCard(CardInfo _card) 
+    {
     
+    }
 }

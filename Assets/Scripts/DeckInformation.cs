@@ -10,8 +10,7 @@ public class DeckInformation : MonoBehaviour
     GameObject initCardPack = null;
     [SerializeField]
     GameObject initHeroPack = null;
-    [SerializeField]
-    List<CardStock> cards = new List<CardStock>();
+    [SerializeField] List<CardStock> cards = new List<CardStock>();
     Dictionary<int, NpcInfo> npcInParty=new Dictionary<int, NpcInfo>();
     private int gold = 500;
     bool initCardOpen = false;

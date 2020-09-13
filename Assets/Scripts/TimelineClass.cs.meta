@@ -1,9 +1,11 @@
 fileFormatVersion: 2
-guid: 2997d78f23feda94698e3049dd288678
+guid: 7477b59f00df07b458ff9c0632f90b43
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - timelineWithEvents: {fileID: 11400000, guid: 713db74970d465e4ca88b28c9076d288,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

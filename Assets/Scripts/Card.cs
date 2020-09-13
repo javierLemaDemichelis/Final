@@ -54,13 +54,17 @@ public class Card : MonoBehaviour
         {
             if (objectOfSensor.transform.CompareTag("Npc")) 
             {
-                GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
-                gameManager.GetComponent<GameManagerController>().SetCardForAction(this.gameObject);
-                gameManager.GetComponent<GameManagerController>().SetHeroForAction(objectOfSensor);
-                gameManager.GetComponent<GameManagerController>().SetState(Enumerations.GameState.Action);
-                this.transform.position = objectOfSensor.GetComponent<Npc>().GetSpawnPoint().transform.position;
-                this.transform.parent = objectOfSensor.GetComponent<Npc>().GetSpawnPoint().transform;
-                contact = true;
+                if (objectOfSensor.GetComponent<Npc>().GetLifeValue() > 0) 
+                {
+                    GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
+                    gameManager.GetComponent<GameManagerController>().SetCardForAction(this.gameObject);
+                    gameManager.GetComponent<GameManagerController>().SetHeroForAction(objectOfSensor);
+                    gameManager.GetComponent<GameManagerController>().SetState(Enumerations.GameState.Action);
+                    this.transform.position = objectOfSensor.GetComponent<Npc>().GetSpawnPoint().transform.position;
+                    this.transform.parent = objectOfSensor.GetComponent<Npc>().GetSpawnPoint().transform;
+                    contact = true;
+                }
+                
             }
         }
         return contact;

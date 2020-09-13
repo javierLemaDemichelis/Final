@@ -6,7 +6,7 @@ public class Enumerations
 {
     public enum GameState
     {
-        Drag, Action,Adventure,EnemyTurn, Loot, Endgame
+        Drag, Action,Adventure,EnemyTurn, Loot,Check, Endgame
     }
     public enum CardState
     {
@@ -22,7 +22,7 @@ public class Enumerations
     }
     public enum OptionType 
     {
-        Gold,AttackPoint,DefensePoint,HealthPoints,Npc,Attack,Flee,Loot,Ignore
+        Gold,AttackPoint,DefensePoint,HealthPoints,Npc,Attack,Flee,Loot,Ignore,Start
     }
 
 }

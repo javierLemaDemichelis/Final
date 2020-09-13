@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PredefinedTimeline : ScriptableObject
 {
-    [SerializeField] TerrainEvents[] terrains;
-    [SerializeField] AdventureEvents[] linearAdventureEvents;
+    [SerializeField] public AdventureEvents[] linearAdventureEvents;
+    
 }

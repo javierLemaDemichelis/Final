@@ -16,6 +16,7 @@ public class GroupManager : MonoBehaviour
     Transform[] spawPosition;
     [SerializeField]
     NpcInfo[] npcInfoList;
+    [SerializeField] GameObject enemyGroupToAttack;
     private void Awake()
     {
         
@@ -90,28 +91,16 @@ public class GroupManager : MonoBehaviour
     public bool GetState() 
     {
         bool someoneAlive = false;
-        if (itsPlayerGroup)
+        
+        foreach (GameObject member in members)
         {
-            foreach (GameObject member in members) 
+            if (member.GetComponent<Npc>().GetLifeValue() > 0&& !member.GetComponent<Npc>().GetItsInanimateObject())
             {
-                if (member.GetComponent<Npc>().GetLifeValue() > 0) 
-                {
-                    someoneAlive = true;
-                    break;
-                }
+                someoneAlive = true;
+                break;
             }
         }
-        else 
-        {
-            foreach (GameObject member in members)
-            {
-                if (member.GetComponent<Npc>().GetLifeValue() > 0)
-                {
-                    someoneAlive = true;
-                    break;
-                }
-            }
-        }
+        
         return someoneAlive;
     }
     public bool GetActionLeft() 
@@ -121,7 +110,7 @@ public class GroupManager : MonoBehaviour
         {
             foreach (GameObject member in members)
             {
-                if (!member.GetComponent<Npc>().GetActionExpended())
+                if (!member.GetComponent<Npc>().GetActionExpended()&& member.GetComponent<Npc>().GetLifeValue()>0)
                 {
                     someonerHasAnAction = true;
                     break;
@@ -132,7 +121,7 @@ public class GroupManager : MonoBehaviour
         {
             foreach (GameObject member in members)
             {
-                if (!member.GetComponent<Npc>().GetActionExpended() )
+                if (!member.GetComponent<Npc>().GetActionExpended() && member.GetComponent<Npc>().GetLifeValue() > 0)
                 {
                     someonerHasAnAction = true;
                     break;
@@ -157,20 +146,24 @@ public class GroupManager : MonoBehaviour
     {
         StartCoroutine("AttackCoroutine");
     }
-    public void SetActionsEnabled(bool state) 
+    public void SetActionsExpended(bool state) 
     {
         if (itsPlayerGroup)
         {
             foreach (GameObject member in members)
             {
-                member.GetComponent<Npc>().SetActionExpended(state);
+                if (member.GetComponent<Npc>().GetLifeValue() > 0) 
+                {
+                    member.GetComponent<Npc>().SetActionExpended(state);
+                }
+                
             }
         }
         else
         {
             foreach (GameObject member in members)
             {
-                if (!member.GetComponent<Npc>().GetActionExpended())
+                if (member.GetComponent<Npc>().GetLifeValue() > 0)
                 {
                     member.GetComponent<Npc>().SetActionExpended(state);
                     break;
@@ -185,49 +178,78 @@ public class GroupManager : MonoBehaviour
 
     IEnumerator AttackCoroutine() 
     {
+        Debug.Log("atackCorrutine");
         yield return new WaitForSeconds(1f);
         Debug.Log("Ataque iniciado");
-        if (!itsPlayerGroup)
+        
+        if (!itsPlayerGroup) 
         {
-            foreach (GameObject member in members)
+
+            foreach (GameObject member in members) 
             {
-                Debug.Log("enemigo:"+members.IndexOf(member));
-                Debug.Log("ActionExpended: "+ member.GetComponent<Npc>().GetActionExpended());
-                if (member.GetComponent<Npc>().GetActionExpended()==false)
+
+                if (!member.GetComponent<Npc>().GetItsInanimateObject()&& member.GetComponent<Npc>().GetLifeValue()>0) 
                 {
-                    Debug.Log("enemigo elegido para realizar el ataque");
-                    
-                    GameObject heroGroup=GameObject.FindGameObjectWithTag("HeroGroup");
-
-                    List<GameObject> heroes=heroGroup.GetComponent<GroupManager>().GetMembers();
-
-                    bool heroAliveFound = false;
-                    while (!heroAliveFound) 
+                    Debug.Log("el atacante:" + member.transform.name);
+                    GameObject enemyToAttack = null;
+                    enemyToAttack = ChooseEnemyToAttack();
+                    if (enemyToAttack != null)
                     {
+                        int attackValue = member.GetComponent<Npc>().GetAttackValue();
 
-                        int randValue = Random.Range(0, heroes.Count);
-                        if (heroes[randValue].GetComponent<Npc>().GetcharacterState())
-                        { 
-                            Debug.Log("heroe elegido para recibir el ataque");
-                            int attackValue = member.GetComponent<Npc>().GetAttackValue();
-                            
-                            int heroeNewLife = heroes[randValue].GetComponent<Npc>().GetLifeValue()-attackValue;
-                            Debug.Log("heroe ahora tiene "+heroeNewLife+" de vida");
-                            heroes[randValue].GetComponent<Npc>().SetLifeValue(heroeNewLife);
-                            heroes[randValue].GetComponent<Npc>().RecieveAttack();
-                            member.GetComponent<Npc>().SetActionExpended(true);
-                            heroAliveFound = true;
-
-                        }
+                        int heroeNewLife = enemyToAttack.GetComponent<Npc>().GetLifeValue() - attackValue;
+                        Debug.Log("heroe ahora tiene " + heroeNewLife + " de vida");
+                        enemyToAttack.GetComponent<Npc>().SetLifeValue(heroeNewLife);
+                        enemyToAttack.GetComponent<Npc>().RecieveAttack();
+                        member.GetComponent<Npc>().SetActionExpended(true);
+                        yield return new WaitForSeconds(1f);
                     }
-                    
-                    break;
+                }
+                
+            }
+            Debug.Log("finalizo el turno de los enemigos");
+            GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
+            if (!GetState())
+            {
+                gameManager.GetComponent<GameManagerController>().RechargeActionPointsForPlayerGroup();
+                gameManager.GetComponent<GameManagerController>().SetState(Enumerations.GameState.Loot);
+            }
+            else 
+            {
+                gameManager.GetComponent<GameManagerController>().RechargeActionPointsForPlayerGroup();
+                gameManager.GetComponent<GameManagerController>().SetState(Enumerations.GameState.Check);
+            }
+            
+        }
+    }
+    public GameObject ChooseEnemyToAttack() 
+    {
+        if (enemyGroupToAttack != null)
+        {
+            List<GameObject> enemyGroupMembers = enemyGroupToAttack.GetComponent<GroupManager>().GetMembers();
+            List<GameObject> enemyGroupMembersAlive = new List<GameObject>();
+            foreach (GameObject enemyMember in enemyGroupMembers) 
+            {
+                if (enemyMember.GetComponent<Npc>().GetLifeValue()>0) 
+                {
+                    enemyGroupMembersAlive.Add(enemyMember);
                 }
             }
-            GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
-            gameManager.GetComponent<GameManagerController>().SetState(Enumerations.GameState.EnemyTurn);
+            //una vez tenemos los miembros vivos del grupo enemigo( grupo del player)
+            int randAliveMember = 0;
+            randAliveMember = Random.Range(0, enemyGroupMembersAlive.Count);
+            return enemyGroupMembersAlive[randAliveMember];
+        }
+        else 
+        {
+            Debug.Log("there is no enemy group to attack");
+            return null;
         }
         
+    }
+    public void SetEnemyGroupToAttack(GameObject _enemyGroupToAttack) 
+    {
+        enemyGroupToAttack = _enemyGroupToAttack;
     }
     
 }

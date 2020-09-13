@@ -17,6 +17,7 @@ TagManager:
   - GameContainer
   - HeroGroup
   - EndTurnButton
+  - TimelineObject
   layers:
   - Default
   - TransparentFX

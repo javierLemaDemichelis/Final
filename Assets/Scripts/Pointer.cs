@@ -169,10 +169,22 @@ public class Pointer : MonoBehaviour
             {
                 if (temp.transform.CompareTag("Npc"))
                 {
-                    GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
-                    gameManager.GetComponent<GameManagerController>().SetObjectiveForAction(temp.transform.gameObject);
-                    Debug.Log("objetivo fijado");
-                    sensor.GetComponent<Sensor>().Reset();
+                    if (!temp.GetComponent<Npc>().GetItsInanimateObject() && temp.GetComponent<Npc>().GetLifeValue() > 0) 
+                    {
+                        GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
+                        gameManager.GetComponent<GameManagerController>().SetObjectiveForAction(temp.transform.gameObject);
+                        Debug.Log("objetivo fijado");
+                        sensor.GetComponent<Sensor>().Reset();
+                    }
+                    else 
+                    {
+                        GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
+                        gameManager.GetComponent<GameManagerController>().ReturnCard();
+                        gameManager.GetComponent<GameManagerController>().SetState(Enumerations.GameState.Drag);
+                        Debug.Log("objetivo perdido");
+
+                    }
+                    
                     
                 }
                 else
@@ -200,6 +212,7 @@ public class Pointer : MonoBehaviour
 
             pointerActive = false;
             sensor.SetActive(false);
+            
         }
     }
     public void SetModeOfSensor(int _mode) 
